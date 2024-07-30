@@ -2,6 +2,7 @@
 
 namespace Ambta\DoctrineEncryptBundle\Subscribers;
 
+use Ambta\DoctrineEncryptBundle\Mapping\AttributeAnnotationReader;
 use Doctrine\ORM\Event\PreFlushEventArgs;
 use ReflectionClass;
 use Doctrine\ORM\Event\PostFlushEventArgs;
@@ -46,7 +47,7 @@ class DoctrineEncryptSubscriber implements EventSubscriber
      * Annotation reader
      * @var Reader
      */
-    private Reader $annReader;
+    private AttributeAnnotationReader $annReader;
 
     /**
      * Used for restoring the encryptor after changing it
@@ -75,7 +76,7 @@ class DoctrineEncryptSubscriber implements EventSubscriber
      * @param Reader $annReader
      * @param EncryptorInterface $encryptor (Optional)  An EncryptorInterface.
      */
-    public function __construct(Reader $annReader, EncryptorInterface $encryptor)
+    public function __construct(AttributeAnnotationReader $annReader, EncryptorInterface $encryptor)
     {
         $this->annReader = $annReader;
         $this->encryptor = $encryptor;
